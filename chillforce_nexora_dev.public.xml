@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="chillforce_nexora_dev" schema="public" type="PostgreSQL - 17.4">
+   <sequences>
+      <sequence increment="1" name="email_logs_id_seq" startValue="1"/>
+      <sequence increment="1" name="institutes_id_seq" startValue="1"/>
+      <sequence increment="1" name="permissions_id_seq" startValue="1"/>
+      <sequence increment="1" name="roles_id_seq" startValue="1"/>
+      <sequence increment="1" name="user_oauth_connections_id_seq" startValue="1"/>
+      <sequence increment="1" name="user_profiles_id_seq" startValue="1"/>
+      <sequence increment="1" name="user_sessions_id_seq" startValue="1"/>
+      <sequence increment="1" name="users_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table catalog="chillforce_nexora_dev" name="email_logs" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('email_logs_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="institute_id" nullable="true" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="user_id" nullable="true" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="receiver" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="email_key" nullable="false" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="status" nullable="false" remarks="" size="2147483647" type="email_status" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="6" name="created_at" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="email_logs_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="flyway_schema_history" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="installed_rank" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="version" nullable="true" remarks="" size="50" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="description" nullable="false" remarks="" size="200" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="type" nullable="false" remarks="" size="20" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="script" nullable="false" remarks="" size="1000" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="checksum" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="installed_by" nullable="false" remarks="" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="7" name="installed_on" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="execution_time" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="success" nullable="false" remarks="" size="1" type="bool" typeCode="-7"/>
+         <primaryKey column="installed_rank" sequenceNumberInPK="1"/>
+         <index name="flyway_schema_history_pk" unique="true">
+            <column ascending="true" name="installed_rank"/>
+         </index>
+         <index name="flyway_schema_history_s_idx" unique="false">
+            <column ascending="true" name="success"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="institutes" remarks="Stores institute information including name, status, and timestamps (UTC)" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('institutes_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Primary key, auto-generated" size="10" type="serial" typeCode="4">
+            <child catalog="chillforce_nexora_dev" column="institute_id" foreignKey="fk_user_profiles_institute" implied="false" onDeleteCascade="true" schema="public" table="user_profiles"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="Unique name of the institute" size="200" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="is_active" nullable="true" remarks="Institute active status, default true" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="3" name="created_at" nullable="true" remarks="Record creation timestamp stored in UTC" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="4" name="updated_at" nullable="true" remarks="Record last update timestamp stored in UTC" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="gen_random_uuid()" digits="0" id="5" name="display_id" nullable="false" remarks="Externally safe UUID identifier for the institute" size="2147483647" type="uuid" typeCode="1111"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="institutes_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="institutes_name_key" unique="true">
+            <column ascending="true" name="name"/>
+         </index>
+         <index name="uq_institutes_display_id" unique="true">
+            <column ascending="true" name="display_id"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="permissions" remarks="Stores system permissions used for access control" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('permissions_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Primary key, auto-generated" size="10" type="serial" typeCode="4">
+            <child catalog="chillforce_nexora_dev" column="permission_id" foreignKey="fk_role_permissions_permission" implied="false" onDeleteCascade="true" schema="public" table="role_permissions"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="Unique name identifying the permission (e.g., VIEW_USERS, EDIT_ROLES, DELETE_RECORDS)" size="150" type="varchar" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="permissions_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="permissions_name_key" unique="true">
+            <column ascending="true" name="name"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="role_permissions" numRows="68" remarks="Mapping table linking roles to permissions (many-to-many relationship)" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="role_id" nullable="false" remarks="Foreign key referencing roles.id" size="10" type="int4" typeCode="4">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_role_permissions_role" implied="false" onDeleteCascade="true" schema="public" table="roles"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="permission_id" nullable="false" remarks="Foreign key referencing permissions.id" size="10" type="int4" typeCode="4">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_role_permissions_permission" implied="false" onDeleteCascade="true" schema="public" table="permissions"/>
+         </column>
+         <primaryKey column="role_id" sequenceNumberInPK="1"/>
+         <primaryKey column="permission_id" sequenceNumberInPK="2"/>
+         <index name="role_permissions_pkey" unique="true">
+            <column ascending="true" name="role_id"/>
+            <column ascending="true" name="permission_id"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="roles" remarks="Stores user roles used for access control and authorization" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('roles_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Primary key, auto-generated" size="10" type="serial" typeCode="4">
+            <child catalog="chillforce_nexora_dev" column="role_id" foreignKey="fk_role_permissions_role" implied="false" onDeleteCascade="true" schema="public" table="role_permissions"/>
+            <child catalog="chillforce_nexora_dev" column="role_id" foreignKey="fk_user_profiles_role" implied="false" onDeleteCascade="true" schema="public" table="user_profiles"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="Unique name identifying the user role (e.g., ADMIN, TEACHER, STUDENT)" size="100" type="varchar" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="roles_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="roles_name_key" unique="true">
+            <column ascending="true" name="name"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="user_o_auth_connections" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('user_oauth_connections_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="user_id" nullable="false" remarks="" size="19" type="int8" typeCode="-5">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_user_o_auth_connections_user" implied="false" onDeleteCascade="false" schema="public" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="o_auth_provider" nullable="false" remarks="" size="2147483647" type="o_auth_provider" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="o_auth_user_id" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="4" name="is_active" nullable="false" remarks="" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="5" name="created_at" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="6" name="updated_at" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="user_oauth_connections_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="uq_o_auth_provider_userid" unique="true">
+            <column ascending="true" name="o_auth_provider"/>
+            <column ascending="true" name="o_auth_user_id"/>
+         </index>
+         <index name="uq_user_o_auth_provider" unique="true">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="o_auth_provider"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="user_profiles" remarks="Associates users with institutes and roles, allowing multiple roles per user within an institute. Includes status and audit timestamps (UTC)" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('user_profiles_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Primary key, auto-generated" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="institute_id" nullable="false" remarks="Foreign key referencing institutes.id" size="10" type="int4" typeCode="4">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_user_profiles_institute" implied="false" onDeleteCascade="true" schema="public" table="institutes"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="user_id" nullable="false" remarks="Foreign key referencing users.id" size="10" type="int4" typeCode="4">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_user_profiles_user" implied="false" onDeleteCascade="true" schema="public" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="role_id" nullable="false" remarks="Foreign key referencing roles.id" size="10" type="int4" typeCode="4">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_user_profiles_role" implied="false" onDeleteCascade="true" schema="public" table="roles"/>
+         </column>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="4" name="is_active" nullable="true" remarks="User profile active status, default true" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="5" name="created_at" nullable="true" remarks="Record creation timestamp stored in UTC" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="6" name="updated_at" nullable="true" remarks="Record last update timestamp stored in UTC" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="7" name="is_default" nullable="true" remarks="Indicates if this profile is the default for the user. Only one active profile per user can be default" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="gen_random_uuid()" digits="0" id="8" name="display_id" nullable="false" remarks="Externally safe UUID identifier for the user profile" size="2147483647" type="uuid" typeCode="1111"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="user_profiles_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="idx_user_profiles_user_id_is_active" unique="false">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="is_active"/>
+         </index>
+         <index name="uq_user_default_profile" unique="true">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="uq_user_institute_role" unique="true">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="institute_id"/>
+            <column ascending="true" name="role_id"/>
+         </index>
+         <index name="uq_user_profiles_display_id" unique="true">
+            <column ascending="true" name="display_id"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="user_sessions" remarks="Tracks active and revoked user sessions based on refresh token UUID (jti)" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('user_sessions_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Primary key, auto-generated" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="token_id" nullable="false" remarks="UUID of the refresh token (jti), uniquely identifies a user session" size="2147483647" type="uuid" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="is_active" nullable="true" remarks="Indicates if the session is active or revoked" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="3" name="created_at" nullable="true" remarks="Record creation timestamp stored in UTC" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="4" name="updated_at" nullable="true" remarks="Record last update timestamp stored in UTC" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="user_id" nullable="false" remarks="Foreign key referencing users.id, associates session with a user" size="10" type="int4" typeCode="4">
+            <parent catalog="chillforce_nexora_dev" column="id" foreignKey="fk_user_sessions_user" implied="false" onDeleteCascade="true" schema="public" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="device_id" nullable="false" remarks="Client identifier for the session, ensures one active session per device" size="2147483647" type="uuid" typeCode="1111"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="user_sessions_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="uq_one_active_session_per_device" unique="true">
+            <column ascending="true" name="device_id"/>
+         </index>
+         <index name="uq_one_active_token_id_per_login" unique="true">
+            <column ascending="true" name="token_id"/>
+         </index>
+      </table>
+      <table catalog="chillforce_nexora_dev" name="users" remarks="Stores application users with login credentials and status" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('users_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Primary key, auto-generated" size="10" type="serial" typeCode="4">
+            <child catalog="chillforce_nexora_dev" column="user_id" foreignKey="fk_user_o_auth_connections_user" implied="false" onDeleteCascade="false" schema="public" table="user_o_auth_connections"/>
+            <child catalog="chillforce_nexora_dev" column="user_id" foreignKey="fk_user_profiles_user" implied="false" onDeleteCascade="true" schema="public" table="user_profiles"/>
+            <child catalog="chillforce_nexora_dev" column="user_id" foreignKey="fk_user_sessions_user" implied="false" onDeleteCascade="true" schema="public" table="user_sessions"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="first_name" nullable="true" remarks="User's first name" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="last_name" nullable="true" remarks="User's last name" size="100" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="email" nullable="false" remarks="User's email, must be unique" size="150" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="password" nullable="true" remarks="Password is nullable to support OAuth-only accounts." size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="mobile_number" nullable="true" remarks="Optional mobile number" size="20" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="6" name="is_active" nullable="true" remarks="User active status, default true" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="7" name="created_at" nullable="false" remarks="Row creation timestamp (UTC)" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="8" name="updated_at" nullable="false" remarks="Row update timestamp (UTC)" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="gen_random_uuid()" digits="0" id="9" name="display_id" nullable="false" remarks="Externally safe UUID identifier for the user" size="2147483647" type="uuid" typeCode="1111"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="users_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="idx_users_email_is_active" unique="false">
+            <column ascending="true" name="email"/>
+            <column ascending="true" name="is_active"/>
+         </index>
+         <index name="uq_users_display_id" unique="true">
+            <column ascending="true" name="display_id"/>
+         </index>
+         <index name="users_email_key" unique="true">
+            <column ascending="true" name="email"/>
+         </index>
+      </table>
+   </tables>
+</database>
