@@ -31,6 +31,24 @@
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>.env</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
@@ -47,30 +65,31 @@
                                 <argument>pgsql</argument>
 
                                 <argument>-host</argument>
-                                <argument>localhost</argument>
+                                <argument>${DB_HOST}</argument>
 
                                 <argument>-port</argument>
-                                <argument>5432</argument>
+                                <argument>${DB_PORT}</argument>
 
                                 <argument>-db</argument>
-                                <argument>chillforce_nexora_dev</argument>
+                                <argument>${DB_NAME}</argument>
 
                                 <argument>-u</argument>
-                                <argument>postgres</argument>
+                                <argument>${DB_USERNAME}</argument>
 
                                 <argument>-p</argument>
-                                <argument>admin</argument>
+                                <argument>${DB_PASSWORD}</argument>
 
                                 <argument>-s</argument>
-                                <argument>public</argument>
+                                <argument>${DB_SCHEMA}</argument>
 
                                 <argument>-o</argument>
-                                <argument>C:/Workspace/Chillforce/NEXORA-DB-SCHEMA/docs</argument>
+                                <argument>${OUTPUT_DIR}</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

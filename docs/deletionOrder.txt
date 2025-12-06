@@ -1,5 +1,4 @@
 flyway_schema_history
-email_logs
 user_profiles
 role_permissions
 user_sessions
