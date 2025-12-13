@@ -78,7 +78,7 @@
                         <div class="col-md-12">
                             <div class="callout callout-info">
                                 <h4>SchemaSpy Analysis of chillforce_nexora_int.public</h4>
-                                <p>Generated on Sun Dec 07 00:44 IST 2025</p>
+                                <p>Generated on Sat Dec 13 22:44 IST 2025</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                                 <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">TABLES</span>
-                                    <span class="info-box-number">9</span>
+                                    <span class="info-box-number">11</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -118,7 +118,7 @@
                                 <span class="info-box-icon bg-green"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">COLUMNS</span>
-                                    <span class="info-box-number">55</span>
+                                    <span class="info-box-number">68</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -130,7 +130,7 @@
                                 <span class="info-box-icon bg-yellow"><i class="ion ion-key"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Constraints</span>
-                                    <span class="info-box-number">7</span>
+                                    <span class="info-box-number">8</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -206,6 +206,15 @@
                                 </thead>
                                 <tbody>
                                     <tr class="tbl even" valign="top">
+                                        <td class="detail"><a href="tables/email_logs.html">email_logs</a></td>
+                                        <td class="detail" align="right">0</td>
+                                        <td class="detail" align="right">0</td>
+                                        <td class="detail" align="right">6</td>
+                                        <td class="detail" align="right">-1</td>
+                                        <td class="detail" align="right">Table</td>
+                                        <td class="comment detail" style="display: table-cell;"></td>
+                                    </tr>
+                                    <tr class="tbl even" valign="top">
                                         <td class="detail"><a href="tables/role_permissions.html">role_permissions</a></td>
                                         <td class="detail" align="right">0</td>
                                         <td class="detail" align="right">2</td>
@@ -252,7 +261,7 @@
                                     </tr>
                                     <tr class="tbl even" valign="top">
                                         <td class="detail"><a href="tables/users.html">users</a></td>
-                                        <td class="detail" align="right">3</td>
+                                        <td class="detail" align="right">4</td>
                                         <td class="detail" align="right">0</td>
                                         <td class="detail" align="right">10</td>
                                         <td class="detail" align="right">-1</td>
@@ -260,22 +269,22 @@
                                         <td class="comment detail" style="display: table-cell;"><p>Stores application users with login credentials and status</p></td>
                                     </tr>
                                     <tr class="tbl even" valign="top">
+                                        <td class="detail"><a href="tables/user_reset_tokens.html">user_reset_tokens</a></td>
+                                        <td class="detail" align="right">0</td>
+                                        <td class="detail" align="right">1</td>
+                                        <td class="detail" align="right">7</td>
+                                        <td class="detail" align="right">-1</td>
+                                        <td class="detail" align="right">Table</td>
+                                        <td class="comment detail" style="display: table-cell;"><p>Tracks password reset tokens for users with expiration and active status</p></td>
+                                    </tr>
+                                    <tr class="tbl even" valign="top">
                                         <td class="detail"><a href="tables/user_sessions.html">user_sessions</a></td>
                                         <td class="detail" align="right">0</td>
                                         <td class="detail" align="right">1</td>
                                         <td class="detail" align="right">7</td>
-                                        <td class="detail" align="right">112</td>
+                                        <td class="detail" align="right">146</td>
                                         <td class="detail" align="right">Table</td>
                                         <td class="comment detail" style="display: table-cell;"><p>Tracks active and revoked user sessions based on refresh token UUID (jti)</p></td>
-                                    </tr>
-                                    <tr class="tbl even" valign="top">
-                                        <td class="detail"><a href="tables/institutes.html">institutes</a></td>
-                                        <td class="detail" align="right">1</td>
-                                        <td class="detail" align="right">0</td>
-                                        <td class="detail" align="right">6</td>
-                                        <td class="detail" align="right">-1</td>
-                                        <td class="detail" align="right">Table</td>
-                                        <td class="comment detail" style="display: table-cell;"><p>Stores institute information including name, status, and timestamps (UTC)</p></td>
                                     </tr>
                                     <tr class="tbl even" valign="top">
                                         <td class="detail"><a href="tables/user_profiles.html">user_profiles</a></td>
@@ -285,6 +294,15 @@
                                         <td class="detail" align="right">-1</td>
                                         <td class="detail" align="right">Table</td>
                                         <td class="comment detail" style="display: table-cell;"><p>Associates users with institutes and roles, allowing multiple roles per user within an institute. Includes status and audit timestamps (UTC)</p></td>
+                                    </tr>
+                                    <tr class="tbl even" valign="top">
+                                        <td class="detail"><a href="tables/institutes.html">institutes</a></td>
+                                        <td class="detail" align="right">1</td>
+                                        <td class="detail" align="right">0</td>
+                                        <td class="detail" align="right">6</td>
+                                        <td class="detail" align="right">-1</td>
+                                        <td class="detail" align="right">Table</td>
+                                        <td class="comment detail" style="display: table-cell;"><p>Stores institute information including name, status, and timestamps (UTC)</p></td>
                                     </tr>
                             </table>
                         </div>

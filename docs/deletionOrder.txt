@@ -1,7 +1,9 @@
 flyway_schema_history
+email_logs
 user_profiles
 role_permissions
 user_sessions
+user_reset_tokens
 user_o_auth_connections
 permissions
 institutes

@@ -3,7 +3,9 @@ roles
 institutes
 permissions
 user_o_auth_connections
+user_reset_tokens
 user_sessions
 role_permissions
 user_profiles
+email_logs
 flyway_schema_history
