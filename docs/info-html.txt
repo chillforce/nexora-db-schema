@@ -1,5 +1,5 @@
-date=2025-12-15 15:05:01+0530
+date=2025-12-15 20:10:45+0530
 os=Windows 11 10.0
 schemaspy-version=7.0.2
 schemaspy-revision=v7.0.2
-renderer=Graphviz dot 13.0.0 
+renderer=Graphviz dot null
