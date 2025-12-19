@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-date=2025-12-15 23:21:59+0530
-=======
-date=2025-12-19 13:17:37+0530
->>>>>>> Stashed changes
+date=2025-12-20 00:23:52+0530
 os=Windows 11 10.0
 schemaspy-version=7.0.2
 schemaspy-revision=v7.0.2

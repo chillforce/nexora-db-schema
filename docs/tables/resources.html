@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>user_sessions - chillforce_nexora_int.public</title>
+        <title>resources - chillforce_nexora_int.public</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>user_sessions</h1><p><span id="recordNumber">179</span> rows</p><br />
+                    <h1>resources</h1><p><span id="recordNumber">-1</span> rows</p><br />
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <i class="fa fa-file-text-o"></i>
@@ -84,7 +84,7 @@
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body clearfix">
-                            <p>Tracks active and revoked user sessions based on refresh token UUID (jti)</p>
+                            <p>Stores sample resources for CRUD reference</p>
                         </div><!-- /.box-body -->
                     </div>
                 </section>
@@ -127,7 +127,7 @@
                                     <td>10</td>
                                     <td title=''></td>
                                     <td title='Automatically updated by the database'>√</td>
-                                    <td>nextval(&#39;user_sessions_id_seq&#39;::regclass)</td>
+                                    <td>nextval(&#39;resources_id_seq&#39;::regclass)</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
@@ -139,9 +139,9 @@
                                     <td><p>Primary key, auto-generated</p></td>
                                 </tr>
                                 <tr>
-                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="token_id">token_id</span></td>
-                                    <td>uuid</td>
-                                    <td>2147483647</td>
+                                    <td><span id="name">name</span></td>
+                                    <td>varchar</td>
+                                    <td>100</td>
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -153,7 +153,24 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td><p>UUID of the refresh token (jti), uniquely identifies a user session</p></td>
+                                    <td><p>Resource name</p></td>
+                                </tr>
+                                <tr>
+                                    <td><span id="description">description</span></td>
+                                    <td>varchar</td>
+                                    <td>255</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td><p>Resource description</p></td>
                                 </tr>
                                 <tr>
                                     <td><span id="is_active">is_active</span></td>
@@ -170,15 +187,15 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td><p>Indicates if the session is active or revoked</p></td>
+                                    <td><p>Resource active status, default true</p></td>
                                 </tr>
                                 <tr>
                                     <td><span id="created_at">created_at</span></td>
-                                    <td>timestamptz</td>
-                                    <td>35,6</td>
-                                    <td title='nullable'>√</td>
+                                    <td>timestamp</td>
+                                    <td>29,6</td>
                                     <td title=''></td>
-                                    <td>now()</td>
+                                    <td title=''></td>
+                                    <td>CURRENT_TIMESTAMP</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
@@ -187,15 +204,15 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td><p>Record creation timestamp stored in UTC</p></td>
+                                    <td><p>Resource creation timestamp</p></td>
                                 </tr>
                                 <tr>
                                     <td><span id="updated_at">updated_at</span></td>
-                                    <td>timestamptz</td>
-                                    <td>35,6</td>
-                                    <td title='nullable'>√</td>
+                                    <td>timestamp</td>
+                                    <td>29,6</td>
                                     <td title=''></td>
-                                    <td>now()</td>
+                                    <td title=''></td>
+                                    <td>CURRENT_TIMESTAMP</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
@@ -204,37 +221,15 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td><p>Record last update timestamp stored in UTC</p></td>
+                                    <td><p>Resource last update timestamp</p></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="user_id">user_id</span></td>
-                                    <td>int4</td>
-                                    <td>10</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="user_sessions.user_id references users.id via fk_user_sessions_user"><a href='users.html'>users</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">fk_user_sessions_user</td>
-                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td><p>Foreign key referencing users.id, associates session with a user</p></td>
-                                </tr>
-                                <tr>
-                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="device_id">device_id</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="display_id">display_id</span></td>
                                     <td>uuid</td>
                                     <td>2147483647</td>
                                     <td title=''></td>
                                     <td title=''></td>
-                                    <td>null</td>
+                                    <td>gen_random_uuid()</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
@@ -243,7 +238,7 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td><p>Client identifier for the session, ensures one active session per device</p></td>
+                                    <td><p>Externally safe UUID identifier for the resource</p></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -276,22 +271,16 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> user_sessions_pkey</td>
+                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> resources_pkey</td>
                                     <td>Primary key</td>
                                     <td><span title='Ascending'>Asc</span></td>
                                     <td>id</td>
                                 </tr>
                                 <tr>
-                                    <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> uq_one_active_session_per_device</td>
+                                    <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> uq_resources_display_id</td>
                                     <td>Must be unique</td>
                                     <td><span title='Ascending'>Asc</span></td>
-                                    <td>device_id</td>
-                                </tr>
-                                <tr>
-                                    <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> uq_one_active_token_id_per_login</td>
-                                    <td>Must be unique</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>token_id</td>
+                                    <td>display_id</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -311,25 +300,13 @@
                                 <h5>Close relationships within degrees of separation</h5>
                                 <ul class="nav nav-tabs pull-left ui-sortable-handle">
                                     <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>
-                                    <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>
                                 </ul>
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="user_sessions.html" target="_top" title="user_sessions" alt="" coords="227,5,549,284">
-<area shape="rect" id="node2" href="users.html" target="_top" title="users" alt="" coords="5,154,183,365">
+<area shape="rect" id="node1" href="resources.html" target="_top" title="resources" alt="" coords="5,5,282,284">
 </map>
-                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/user_sessions.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
-                                    </div>
-                                    <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
-                                        <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="user_o_auth_connections.html" target="_top" title="user_o_auth_connections" alt="" coords="244,5,532,99">
-<area shape="rect" id="node2" href="users.html" target="_top" title="users" alt="" coords="5,171,183,382">
-<area shape="rect" id="node3" href="user_profiles.html" target="_top" title="user_profiles" alt="" coords="297,117,479,211">
-<area shape="rect" id="node4" href="user_reset_tokens.html" target="_top" title="user_reset_tokens" alt="" coords="275,229,501,323">
-<area shape="rect" id="node5" href="user_sessions.html" target="_top" title="user_sessions" alt="" coords="227,341,549,620">
-</map>
-                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/user_sessions.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/resources.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                 </div>
                             </div>
